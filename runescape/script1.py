@@ -30,26 +30,12 @@ mouse = Controller()
 # distance from right click to 'bank banker' is 40
 # distance across 'bank banker button is 90
 
-def leftclick(location, xdim, ydim):
+def click(location, xdim, ydim, side):
     # Moves mouse to a location and left clicks it.
     # dim defines the range in which randomness is generated,
     # corresponds to the size of the object being clicked.
 
-    r1 = random.randint(-xdim, xdim)
-    r2 = random.randint(-ydim, ydim)
-    r = (r1, r2)
-
-    mouse.position = tuple(map(lambda i, j: i+j, location, r))  # move to location
-    time.sleep(0.25 + (r1 / 1000))
-    mouse.click(Button.left, 1)  # left click
-    time.sleep(0.5 + (r2 / 1000))
-
-    return
-
-def rightclick(location, xdim, ydim):
-    # Moves mouse to a location and right clicks it.
-    # dim defines the range in which randomness is generated,
-    # corresponds to the size of the object being clicked.
+    # side 1 = left click, side 2 = right click
 
     r1 = random.randint(-xdim, xdim)
     r2 = random.randint(-ydim, ydim)
@@ -57,27 +43,22 @@ def rightclick(location, xdim, ydim):
 
     mouse.position = tuple(map(lambda i, j: i+j, location, r))  # move to location
     time.sleep(0.25 + (r1 / 1000))
-    mouse.click(Button.right, 1)  # right click
+    if side == 1:
+        mouse.click(Button.left, 1)  # left click
+    elif side == 2:
+        mouse.click(Button.right, 1)  # right click
     time.sleep(0.5 + (r2 / 1000))
 
     return
 
+# (1043, 422), (1100, 892)
 
 def enterbank():
     # This function opens the bank when the player has completed the setup above.
 
-    r1 = random.randint(-30, 30)
-
-    rightclick((1315, 470), 25, 5)  # right click banker
-    time.sleep(0.25)  # gives time for the bank window to open
-
-    p = random.choice([-1, 1])  # randomly chooses -1 or 1
-    shift = (r1, 40+p)
-    mouse.position = tuple(map(lambda i, j: i+j, mouse.position, shift))  # move to 'bank banker'
-    leftclick(mouse.position, 0, 0)  # left click 'bank banker'
+    click((1075, 650), 20, 200, 1)  # left clicks the board in front of the banker, this opens the bank
 
     return
-
 
 # (651, 133) top left corner of bank slot 1
 # (672, 155) bottom right corner of bank slot 1
@@ -95,14 +76,13 @@ def grabcakerecipe():
     # Each click puts 14 cake/chocolate in inventory with take x selected, x set to 14,
     # this fills the inventory each time.
 
-    leftclick((661, 147), 5, 5)  # left click bank slot 1
+    click((661, 147), 5, 5, 1)  # left click bank slot 1
 
-    leftclick((711, 145), 5, 5)  # left click bank slot 2
+    click((711, 145), 5, 5, 1)  # left click bank slot 2
 
-    leftclick((1060, 70), 5, 5)  # left click 'close bank'
+    click((1060, 70), 5, 5, 1)  # left click 'close bank'
 
     return
-
 
 # (215, 942) top left of make cake button
 # (303, 1007) bottom right of make cake button
@@ -118,21 +98,20 @@ def makecake():
 
     r1 = random.randint(-40, 40)
 
-    rightclick((1735, 774), 5, 5)  # right click inventory slot 1
+    click((1735, 774), 5, 5, 2)  # right click inventory slot 1
 
     p = random.choice([-1, 1])  # randomly chooses -1 or 1
     shift = (r1, 40 + p)
     mouse.position = tuple(map(lambda i, j: i + j, mouse.position, shift))  # move to 'use cake'
-    leftclick(mouse.position, 0, 0)  # left click 'use cake'
+    click(mouse.position, 0, 0, 1)  # left click 'use cake'
 
-    leftclick((1821, 882), 5, 5)  # left click inventory slot 15
+    click((1821, 882), 5, 5, 1)  # left click inventory slot 15
     time.sleep(0.5)  # gives time for 'make cake' button to appear
 
-    leftclick((260, 970), 40, 30)  # left click 'make cake' button
+    click((260, 970), 40, 30, 1)  # left click 'make cake' button
     time.sleep(17.5)  # gives time for cake to be made
 
     return
-
 
 
 def play():
@@ -161,7 +140,7 @@ def play():
         time.sleep(0.5 + r1)
 
         # this deposits the made chocolate cake into the bank
-        leftclick((1735, 774), 5, 5)  # left click inventory slot 1
+        click((1735, 774), 5, 5, 1)  # left click inventory slot 1
 
     return
 

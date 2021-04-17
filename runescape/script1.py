@@ -140,7 +140,7 @@ def play():
     # chocolate cakes as you need, and then stops.
 
     k = int(input('How many cakes are you making today? '))  # defines how many times to loop
-    k = math.floor(k)-1
+    k = math.floor(k/14)
     print('Starting up in 5, 4, 3, 2, 1...')
     time.sleep(5)  # gives time to tab into game
 

@@ -20,7 +20,7 @@ import time
 import random
 import math
 
-mouse = Controller()  # don't actually know what that does
+mouse = Controller()
 
 
 # top of the banker: (1305, 377)
@@ -78,6 +78,7 @@ def enterbank():
 
     return
 
+
 # (651, 133) top left corner of bank slot 1
 # (672, 155) bottom right corner of bank slot 1
 
@@ -101,6 +102,7 @@ def grabcakerecipe():
     leftclick((1060, 70), 5, 5)  # left click 'close bank'
 
     return
+
 
 # (215, 942) top left of make cake button
 # (303, 1007) bottom right of make cake button
@@ -131,7 +133,7 @@ def makecake():
 
     return
 
-#print(mouse.position)
+
 
 def play():
     # This function defines the loop for the whole script, combining the elements above so that the bot makes as many

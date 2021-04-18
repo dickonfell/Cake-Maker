@@ -56,7 +56,7 @@ def click(location, xdim, ydim, side):
 def enterbank():
     # This function opens the bank when the player has completed the setup above.
 
-    click((1075, 650), 20, 200, 1)  # left clicks the board in front of the banker, this opens the bank
+    click((1075, 650), 10, 25, 1)  # left clicks the board in front of the banker, this opens the bank
 
     return
 
